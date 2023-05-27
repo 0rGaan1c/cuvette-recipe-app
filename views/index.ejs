@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>Recipe List</title>
+</head>
+
+<body>
+	<h1>Recipe List</h1>
+	<% if (recipes.length===0) { %>
+		<p>No recipes found.</p>
+		<% } else { %>
+			<ul>
+				<% recipes.forEach((recipe)=> { %>
+					<li>
+						<h2>
+							<%= recipe.receipeName %>
+						</h2>
+						<p>Time: <%= recipe.receipeTime %> minutes
+						</p>
+						<p>Ingredients: <%= recipe.ingredeints.join(', ') %></p>
+            <p>Serves: <%= recipe.serves %></p>
+						<form action="/delete-recipe/<%= recipe._id %>?_method=DELETE" method="POST">
+					<button type="submit">Delete</button>
+</form>
+
+
+						<form action="/update-recipe/<%= recipe._id %>?_method=PUT" method="POST">
+  <input type="text" name="receipeTime" placeholder="New Time">
+  <input type="text" name="serves" placeholder="New Serves">
+  <button type="submit">Update</button>
+</form>
+          </li>
+        <% }); %>
+      </ul>
+    <% } %>
+
+    <h2>Add a New Recipe</h2>
+    <form action="/recipes" method="POST">
+      <input type="text" name="receipeName" placeholder="Recipe Name" required>
+      <input type="text" name="receipeTime" placeholder="Recipe Time (in minutes)" required>
+      <input type="text" name="ingredeints" placeholder="Ingredients (comma-separated)" required>
+      <input type="text" name="serves" placeholder="Serves" required>
+      <button type="submit">Add Recipe</button>
+    </form>
+  </body>
+</html>
