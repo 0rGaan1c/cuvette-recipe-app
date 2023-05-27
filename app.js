@@ -28,7 +28,7 @@ app.use(methodOverride("_method")); // Add this line
 app.use("/", recipeRoutes);
 
 // Start the server
-const PORT = 3000;
+const PORT = process.env.PORT || 3001;
 app.listen(PORT, () => {
   console.log(`Server listening on port ${PORT}`);
 });
